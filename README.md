@@ -1,0 +1,1 @@
+My rails template file
