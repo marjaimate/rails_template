@@ -55,7 +55,7 @@ if yes? 'Do you wish to add devise gem? (y/n)'
   run "bundle install"
   generate "devise:install"
   name = ask('What should be the model for Devise?')
-  generate "devise model #{name}"
+  generate "devise #{name}"
   gem_name_list << 'devise'
 else
   generate "model User email:string name:string"
