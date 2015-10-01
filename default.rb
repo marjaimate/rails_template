@@ -56,6 +56,8 @@ if yes? 'Do you wish to add devise gem? (y/n)'
   name = ask('What should be the model for Devise?')
   generate "devise model #{name}"
   gem_name_list << 'devise'
+else
+  generate "model User email:string name:string"
 end
 
 # rolify - optional
