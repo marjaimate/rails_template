@@ -14,7 +14,6 @@ git commit: %Q{ -m "Initial skeleton" }
 run "sed -i '' '/^production:/,$d' config/database.yml"
 
 rake "db:create:all"
-rake "db:migrate"
 
 git add: "."
 git commit: %Q{ -m "Database configuration" }
@@ -39,6 +38,8 @@ gem_name_list = ['simple_form', 'unicorn']
 gem 'simple_form'
 # unicorn
 gem 'unicorn'
+run "bundle install"
+generate "simple_form:install"
 
 # pundit - optional
 if yes? 'Do you wish to add pundit gem? (y/n)'
@@ -109,3 +110,7 @@ run "cp -r #{File.expand_path('../bootstrap_templates/*', __FILE__)} ."
 
 git add: "."
 git commit: %Q{ -m "Add bootstrap" }
+
+rake "db:migrate"
+git add: "."
+git commit: %Q{ -m "Run migrations after all install is finished" }
