@@ -44,15 +44,8 @@ gem 'unicorn'
 if yes? 'Do you wish to add pundit gem? (y/n)'
   gem 'pundit'
   run "bundle install"
+  generate "pundit:install"
   gem_name_list << 'pundit'
-end
-
-# rolify - optional
-if yes? 'Do you wish to add rolify gem? (y/n)'
-  gem 'rolify'
-  run "bundle install"
-  generate "rolify Role User"
-  gem_name_list << 'rolify'
 end
 
 # devise - optional
@@ -63,6 +56,14 @@ if yes? 'Do you wish to add devise gem? (y/n)'
   name = ask('What should be the model for Devise?')
   generate "devise model #{name}"
   gem_name_list << 'devise'
+end
+
+# rolify - optional
+if yes? 'Do you wish to add rolify gem? (y/n)'
+  gem 'rolify'
+  run "bundle install"
+  generate "rolify Role User"
+  gem_name_list << 'rolify'
 end
 
 git add: "."
