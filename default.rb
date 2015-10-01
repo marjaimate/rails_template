@@ -33,6 +33,8 @@ git commit: %Q{ -m "Set ruby version to #{RUBY_VERSION}" }
 
 ######### Utilities
 
+gem_name_list = ['simple_form', 'unicorn']
+
 # simple form
 gem 'simple_form'
 # unicorn
@@ -41,22 +43,30 @@ gem 'unicorn'
 # pundit - optional
 if yes? 'Do you wish to add pundit gem? (y/n)'
   gem 'pundit'
+  run "bundle install"
+  gem_name_list << 'pundit'
 end
 
 # rolify - optional
 if yes? 'Do you wish to add rolify gem? (y/n)'
   gem 'rolify'
+  run "bundle install"
   generate "rolify Role User"
+  gem_name_list << 'rolify'
 end
 
 # devise - optional
 if yes? 'Do you wish to add devise gem? (y/n)'
   gem 'devise'
+  run "bundle install"
   generate "devise:install"
   name = ask('What should be the model for Devise?')
   generate "devise model #{name}"
+  gem_name_list << 'devise'
 end
 
+git add: "."
+git commit: %Q{ -m "Install gems: #{gem_name_list.join(", ")}" }
 
 ######### Testing
 
